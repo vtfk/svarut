@@ -1,0 +1,28 @@
+{
+  "definitions": {
+    "forsendelsesHistorikk": {
+      "type": "object",
+      "properties": {
+        "hendelsesLogger": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/hendelsesLogg"
+          }
+        }
+      }
+    },
+    "hendelsesLogg": {
+      "type": "object",
+      "properties": {
+        "tidspunkt": {
+          "type": "string"
+        },
+        "hendelse" : {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "$ref": "#/definitions/forsendelsesHistorikk",
+  "$schema": "http://json-schema.org/draft-06/schema#"
+}

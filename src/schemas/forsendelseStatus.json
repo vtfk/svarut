@@ -1,0 +1,59 @@
+{
+  "definitions": {
+    "forsendelseStatusResult": {
+      "type": "object",
+      "properties": {
+        "statuser": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/forsendelseStatus"
+          }
+        }
+      }
+    },
+    "forsendelseStatus": {
+      "type": "object",
+      "properties": {
+        "forsendelsesId": {
+          "$ref": "forsendelseid.json#/definitions/forsendelsesId"
+        },
+        "sisteStatusEndring": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "multipleOf": 1,
+          "existingJavaType": "java.util.Date"
+        },
+        "status": {
+          "$ref": "#/definitions/status"
+        }
+      }
+    },
+    "status": {
+      "javaType": "no.ks.fiks.svarut.klient.model.Status",
+      "type": "string",
+      "description": "MOTTATT\tEt kall mottatt på forsendelses-service. En id blir tildelt forsendelsen.\nAKSEPTERT\tMeldingen er validert og forsendelsesfil dannet.\nKLAR_FOR_MOTTAK\tVenter på at forsendelse skal bli lastet ned av mottaker.\nVARSLET\tEt varsel om forsendelsen er sendt til varslingstjenesten.\nLEST\tEn forsendelse er lest når hele forsendelsesfilen er lastet ned av mottaker.\nSENDT_PRINT\tForsendelsen er blitt overført til printleverandør.\nSENDT_DIGITALT\tForsendelsen er motatt og sendt slik den skal. Ikke blitt lest enda. Forsendelser med denne status vil kun leveres digitalt, og vil aldri gå til print.\nSENDT_SDP\tForsendelsen er motatt og sendt til Sikker digital postkasse.\nLEVERT_SDP\tForsendelsen er motatt og sendt til Sikker digital postkasse. Vi har motatt Leveringskvittering fra SDP. Forsendelsen skal da være tilgjengelig for mottaker.\nPRINTET\tPrintkvittering mottatt fra printleverandør eller manuell print bekreftet(via webgrensesnitt).\nAVVIST\tForsendelsen er ikke validert pga. manglende/korrupt metadata, eller fordi forsendelsesfil ikke kunne dannes.\nIKKE_LEVERT\tKun digital leveranse hvor vi ikke har klart å levere forsendelsen.\nMANUELT_HANDTERT\tForsendelsen er manuelt avsluttet, f.eks. pga en feilsituasjon.\n",
+      "enum": [
+        "MOTTAT",
+        "AKSEPTERT",
+        "AVVIST",
+        "VARSLET",
+        "LEST",
+        "SENDT_PRINT",
+        "PRINTET",
+        "MANUELT_HANDTERT",
+        "SENDT_DIGITALT",
+        "SENDT_SDP",
+        "LEVERT_SDP",
+        "KLAR_FOR_MOTTAK",
+        "IKKE_LEVERT"
+      ]
+    }
+  },
+  "$ref": "#/definitions/forsendelseStatusResult",
+  "$schema": "http://json-schema.org/draft-06/schema#"
+}

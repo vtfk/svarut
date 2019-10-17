@@ -1,0 +1,17 @@
+{
+  "definitions": {
+    "error": {
+      "type": "object",
+      "properties": {
+        "errorcode": {
+          "type": ["string", "null"]
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "$ref": "#/definitions/error",
+  "$schema": "http://json-schema.org/draft-06/schema#"
+}

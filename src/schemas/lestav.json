@@ -1,0 +1,23 @@
+{
+  "definitions": {
+    "lestAv": {
+      "type": "object",
+      "properties": {
+        "lestAvFodselsNummer": {
+          "type": "string"
+        },
+        "navnPaEksterntSystem": {
+          "type": "string"
+        },
+        "datoLest": {
+          "type": ["number","null"],
+          "multipleOf" : 1,
+          "existingJavaType": "java.util.Date"
+        }
+      },
+      "required": ["lestAvFodselsNummer","navnPaEksterntSystem","datoLest"]
+    }
+  },
+  "$ref": "#/definitions/lestAv",
+"$schema": "http://json-schema.org/draft-06/schema#"
+}

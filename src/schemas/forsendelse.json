@@ -1,0 +1,344 @@
+{
+  "definitions": {
+    "forsendelse": {
+      "type": "object",
+      "properties": {
+        "mottaker": {
+          "description": "Mottaker av forsendelsen",
+          "$ref": "#/definitions/adresse"
+        },
+        "eksponertFor": {
+          "description": "Disse kan også laste ned filene for forsendelsen. Hvis avsender indexerer forsendelsen i FIKS-Innsyn blir forsendelsen også tilgjengelig for disse.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/digitaladresse"
+          }
+        },
+        "avgivendeSystem": {
+          "description": "Streng som forteller system med versjon",
+          "type": ["string", "null"]
+        },
+        "tittel": {
+          "type": "string"
+        },
+        "konteringsKode": {
+          "description": "Forsendelser blir gruppert på konteringskode i faktura.",
+          "type": ["string", "null"]
+        },
+        "kunDigitalLevering": {
+          "description": "Vil ikke under noen omstendigheter blir printet. INGEN GARANTI OM LEVERANSE. Vi prøver få godt vi kan, men funker ingen digitale kanaler får avsender ingen tilbakemelding. Brukes til typisk reklame.",
+          "type": ["boolean"]
+        },
+        "kryptert": {
+          "description": "Er filene kryptert",
+          "type": ["boolean"]
+        },
+        "utskriftsKonfigurasjon": {
+          "description": "Hvordan skal forsendelsen printes",
+          "$ref": "#/definitions/utskriftsKonfigurasjon"
+        },
+        "krevNiva4Innlogging": {
+          "description": "Skal en kreve nivå4 innlogging for å lese forsendelsen. Brukes på sensetive forsendelser.",
+          "type": ["boolean"]
+        },
+        "metadataFraAvleverendeSystem": {
+          "description": "Noark metadata fra avsendersystemet",
+          "$ref": "#/definitions/noarkMetadataFraAvleverendeSaksSystem"
+        },
+        "metadataForImport": {
+          "description": "Noark metadata avsender vet om mottakersystem.",
+          "$ref": "#/definitions/noarkMetadataForImport"
+        },
+        "svarSendesTil": {
+          "description": "Svar på denne forsendelsen sendes til.",
+          "$ref": "#/definitions/adresse"
+        },
+        "svarPaForsendelse": {
+          "description": "Dette er svar på en tidligere forsendelse.",
+          "$ref": "#/definitions/forsendelsesId"
+        },
+        "dokumenter": {
+          "description": "Metadata om dokumentene som skal være med forsendelsen",
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/definitions/dokument"
+          }
+        },
+        "lenker": {
+          "description": "Lenker som er med forsendelsen, disse blir vist i meldingen i Altinn, eBoks/Digipost og andre fremtidige kanaler.",
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/definitions/lenke"
+          }
+        },
+        "forsendelsesType": {
+          "description": "ForsendelseType, kan brukes til å kategorisere forsendelsen. Det er kun typene du får returnert fra /tjenester/api/forsendelse/v1/forsendelseTyper som kan brukes til å route meldingen til korrekt fagsystem via SvarInn",
+          "type": ["string","null"]
+        },
+        "eksternReferanse": {
+          "description": "ID i avleverende system, eller annen id som identifiserer forsendelsen. Kan brukes til å finne forsendelseId",
+          "type": ["string","null"]
+        },
+        "svarPaForsendelseLink": {
+          "description": "Skal det ligge med link til edialog svar på denne forsendelsen.",
+          "type": ["boolean"]
+        },
+        "signeringUtloper": {
+          "description": "Hvis forsendelsen kan signeres utløper muligheten til å signere etter dette tidspunketet.",
+          "type": ["number","null"],
+          "multipleOf" : 1,
+          "existingJavaType": "java.util.Date"
+        },
+        "signaturType" : {
+          "description": "Signaturtype, angir hvilken type signatur du får tilbake. See mer her: https://samarbeid.difi.no/felleslosninger/esignering",
+          "javaType": "no.ks.fiks.svarut.klient.model.SignaturType",
+          "type": ["string","null"],
+          "enum": [null, "AUTENTISERT_SIGNATUR","AVANSERT_SIGNATUR"]
+        }
+      },
+      "required": [
+        "tittel", "mottaker"
+      ]
+    },
+    "lenke": {
+      "type": "object",
+      "properties": {
+        "urlLenke": {
+          "description": "Urlen",
+          "examples": ["http://vg.no", "https://svarut.ks.no/edialog/mottaker/998877777"],
+          "type": "string"
+        },
+        "urlTekst": {
+          "description": "Tekst på urlen.",
+          "type": "string"
+        },
+        "ledeTekst": {
+          "description": "En paragraf med tekst som vises før lenken.",
+          "type": ["string", "null"]
+        }
+      },
+      "required": ["urlLenke","urlTekst"]
+    },
+    "dokument": {
+      "type": "object",
+      "properties": {
+        "filnavn": {
+          "description": "Filnavn, kan ikke inneholde: \" < > ? * | : \\ /",
+          "examples": ["small.pdf", "vedlegge2.pdf", "video.mkv"],
+          "type": "string",
+          "maxLength": 226
+        },
+        "mimeType": {
+          "description": "Gyldig mimetype for filen.",
+          "type": "string"
+        },
+        "skalSigneres": {
+          "description": "Om filen kan signeres",
+          "type": ["boolean"]
+        },
+        "dokumentType": {
+          "description": "Noark dokumenttype. M083",
+          "type": ["string", "null"]
+        },
+        "giroarkSider": {
+          "description": "Liste med sidetall som skal printes på gult giroark. Digital versjon vil få grått giroark. Første side er 1. Ved dobbelsidig print må giroarket ha en tom bakside.",
+          "type": ["array","null"],
+          "existingJavaType": "java.util.TreeSet",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "ekskluderesFraUtskrift": {
+          "description": "Denne filen skal ikke inngå i print. Brukes om du sender andre formater enn pdf som ikke kan eller skal printes.",
+          "type": ["boolean"]
+        }
+      },
+      "required": ["filnavn", "mimeType"]
+    },
+    "forsendelsesId": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "id": {
+          "existingJavaType": "java.util.UUID",
+          "type": "string",
+          "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "adresse": {
+      "type": "object",
+      "properties": {
+        "postAdresse": {
+          "$ref": "#/definitions/postAdresse"
+        },
+        "digitalAdresse": {
+          "$ref": "#/definitions/digitaladresse"
+        }
+      }
+    },
+    "noarkMetadataForImport" : {
+      "type": ["object", "null"],
+      "properties": {
+        "saksSekvensNummer": {
+          "type": ["integer"]
+        },
+        "saksAar": {
+          "type": ["integer"]
+        },
+        "journalPostType": {
+          "description": "Kan settet til f.eks U hvis det skal importeres som et utgående dokument.",
+          "type": ["string", "null"]
+        },
+        "journalStatus": {
+          "type": ["string", "null"]
+        },
+        "dokumentetsDato": {
+          "type": ["number","null"],
+          "multipleOf" : 1,
+          "existingJavaType": "java.util.Date"
+        },
+        "tittel": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "noarkMetadataFraAvleverendeSaksSystem": {
+      "type": ["object","null"],
+      "properties": {
+        "saksSekvensNummer": {
+          "type": ["integer"]
+        },
+        "saksAar": {
+          "type": ["integer"]
+        },
+        "journalAar": {
+          "type": ["integer"]
+        },
+        "journalSekvensNummer": {
+          "type": ["integer"]
+        },
+        "journalPostNummer": {
+          "type": ["integer"]
+        },
+        "journalPostType": {
+          "type": ["string", "null"]
+        },
+        "journalStatus": {
+          "type": ["string", "null"]
+        },
+        "journalDato": {
+          "type": ["number","null"],
+          "multipleOf" : 1,
+          "existingJavaType": "java.util.Date"
+        },
+        "dokumentetsDato": {
+          "type": ["number","null"],
+          "multipleOf" : 1,
+          "existingJavaType": "java.util.Date"
+        },
+        "tittel": {
+          "type": ["string", "null"]
+        },
+        "saksBehandler": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ekstraMetadata": {
+          "description": "Brukes til andre data som avsender vil ha med i forsendelsen.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/entry"
+          }
+        }
+      }
+    },
+    "entry": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": ["key","value"]
+    },
+    "utskriftsKonfigurasjon": {
+      "type": "object",
+      "properties": {
+        "utskriftMedFarger": {
+          "type": ["boolean"]
+        },
+        "tosidig": {
+          "type": ["boolean"]
+        }
+      }
+    },
+    "postAdresse": {
+      "type": "object",
+      "description": "Se posten: https://www.posten.no/sende/klargjoring/adressering Dette blir printet på konvolutten i denne rekkefølge. Postnr og poststed på samme linje.",
+      "properties": {
+        "navn": { "type": "string" },
+        "adresse1": { "type":  ["string", "null"] },
+        "adresse2": { "type":  ["string", "null"] },
+        "adresse3": { "type":  ["string", "null"] },
+        "postNummer": { "type":  ["string", "null"] },
+        "postSted": { "type": "string" },
+        "land": {
+          "description": "Gyldige navn på Norge vil gi norsk porto. Gyldige land i europa vil gi Europa porto. Andre verdier gir Verdens porto. ",
+          "type":  ["string", "null"] }
+      },
+      "required": [
+        "navn", "postSted"
+      ]
+    },
+    "digitaladresse": {
+      "type": "object",
+      "properties": {
+        "fodselsNummer": {
+          "type": "string",
+          "minLength": 11,
+          "maxLength": 11
+        },
+        "organisasjonsNummer": {
+          "type": "string",
+          "minLength": 9,
+          "maxLength": 9
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "fodselsNummer"
+          ],
+          "not": {
+            "required": [
+              "organisasjonsNummer"
+            ]
+          }
+        },
+        {
+          "required": [
+            "organisasjonsNummer"
+          ],
+          "not": {
+            "required": [
+              "fodselsNummer"
+            ]
+          }
+        }
+      ]
+
+    }
+  },
+  "$ref": "#/definitions/forsendelse"
+}
