@@ -1,0 +1,4 @@
+# SvarUT
+
+# License
+[MIT](LICENSE)
