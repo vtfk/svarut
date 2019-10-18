@@ -9,7 +9,7 @@
   const svarut = require('./src/index')(config)
 
   const forsendelse = {
-    tittel: 'testforsendelse',
+    tittel: 'Testforsendelse',
     mottaker: {
       postAdresse: {
         navn: 'Terje Tverrtryne',
@@ -35,10 +35,20 @@
     }
   }
 
+  let forsendelseId
+
   try {
     const response = await svarut.sendForsendelse(forsendelse)
-    console.log(response)
+    forsendelseId = response.id
+    console.log('sendForsendelse', response)
   } catch (error) {
-    console.error(error.message)
+    console.error('sendForsendelse', error.message)
+  }
+
+  try {
+    const response = await svarut.getStatus(forsendelseId)
+    console.log('getStatus', response)
+  } catch (error) {
+    console.error('getStatus', error.message)
   }
 })()

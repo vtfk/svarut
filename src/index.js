@@ -1,5 +1,6 @@
 const axios = require('axios')
 const sendForsendelse = require('./lib/send-forsendelse')
+const getStatus = require('./lib/get-status')
 
 module.exports = (settings) => {
   if (!settings) throw Error('Didn`t get any settings, please take a look at the documentation again...')
@@ -23,6 +24,9 @@ module.exports = (settings) => {
   return {
     sendForsendelse: (forsendelse) => {
       return sendForsendelse(forsendelse, axiosInstance)
+    },
+    getStatus: (forsendelseId) => {
+      return getStatus(forsendelseId, axiosInstance)
     }
   }
 }
