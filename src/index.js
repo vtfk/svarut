@@ -7,7 +7,7 @@ module.exports = (settings) => {
   if (!settings.password) throw Error('Missing password from settings.. How are we supposed to log in?')
 
   const url = settings.url || 'https://test.svarut.ks.no'
-  const apiEndpoint = '/tjenester/api/forsendelse/v1/'
+  const apiEndpoint = settings.endpoint || '/tjenester/api/forsendelse/v1/'
 
   const axiosSettings = {
     baseURL: `${url}${apiEndpoint}`,

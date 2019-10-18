@@ -1,13 +1,15 @@
 (async () => {
+  require('dotenv').config()
+
   const config = {
-    username: 'svarut-username',
-    password: 'svarut-password'
+    username: process.env.SVARUT_USERNAME,
+    password: process.env.SVARUT_PASSWORD
   }
 
   const svarut = require('./src/index')(config)
 
   const forsendelse = {
-    tittel: 'test forsendelse',
+    tittel: 'testforsendelse',
     mottaker: {
       postAdresse: {
         navn: 'Terje Tverrtryne',
