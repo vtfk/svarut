@@ -24,7 +24,7 @@ module.exports = async (forsendelse, instance) => {
     }
 
     // Add 'avgivendeSystem' if not set.
-    payload.avgivendeSystem = forsendelse.avgivendeSystem || 'node-svarut-rest'
+    payload.avgivendeSystem = forsendelse.avgivendeSystem || 'node-svarut'
 
     const form = new FormData()
     form.append('forsendelse', JSON.stringify(payload))
@@ -43,7 +43,7 @@ module.exports = async (forsendelse, instance) => {
     const sendResult = await instance.post(`${id}/sendForsendelse`, form, { headers: { ...form.getHeaders(), 'Content-Length': form.getLengthSync() } })
     return sendResult.data
   } catch (error) {
-    if (error.response) console.error(error.response.data)
+    if (error.response) return (error.response.data)
     throw error
   }
 }
