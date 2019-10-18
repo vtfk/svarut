@@ -12,7 +12,7 @@ npm install @vtfk/svarut
 
 Please take a look at the [forsendelse](https://github.com/vtfk/svarut/blob/master/src/schemas/forsendelse.json) schema.
 
-### Firs - init svarut instance
+### First - init svarut instance
 ```javascript
 const options = {
   username: 'svarut-username',
@@ -58,7 +58,7 @@ const result = svarut.sendForsendelse(forsendelse)
 ```
 
 Output:
-```javascript
+```json
   { id: 'd24658e8-d65d-4c3e-b201-564b5e880cde' }
 ```
 
@@ -69,7 +69,7 @@ Output:
 ```
 
 Output:
-```javascript
+```json
 { 
   forsendelsesId: { id: 'd24658e8-d65d-4c3e-b201-564b5e880cde' },
   sisteStatusEndring: 1571379874246,
