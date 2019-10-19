@@ -1,5 +1,5 @@
-# [WIP] SvarUt
-This node module lets you use [SvarUt](https://www.ks.no/fagomrader/digitalisering/felleslosninger/svar-inn-og-svar-ut/)'s [ForsendelseRestServiceV1](https://ks-no.github.io/svarut/integrasjon/forsendelserestservicev1/) from node without having to think about the REST enpoints. It also verifies that the data provided is valid upon sending.
+# SvarUt
+This node module lets you use [SvarUt](https://www.ks.no/fagomrader/digitalisering/felleslosninger/svar-inn-og-svar-ut/)'s [ForsendelseRestServiceV1](https://ks-no.github.io/svarut/integrasjon/forsendelserestservicev1/) from node without having to think about the REST enpoints. It also verifies that the data provided is valid upon sending. 
 
 
 ## Installation
