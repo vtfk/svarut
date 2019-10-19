@@ -1,6 +1,12 @@
 const axios = require('axios')
 const sendForsendelse = require('./lib/send-forsendelse')
 const getStatus = require('./lib/get-status')
+const getForsendelseHistorikk = require('./lib/get-forsendelse-historikk')
+const getSigneringHistorikk = require('./lib/get-signering-historikk')
+const getDokumentMetadata = require('./lib/get-dokument-metadata')
+const getForsendelseTyper = require('./lib/get-forsendelse-typer')
+const getForsendelseEksternref = require('./lib/get-forsendelse-eksternref')
+const setForsendelseLest = require('./lib/set-forsendelse-lest')
 
 module.exports = (settings) => {
   if (!settings) throw Error('Didn`t get any settings, please take a look at the documentation again...')
@@ -25,8 +31,26 @@ module.exports = (settings) => {
     sendForsendelse: (forsendelse) => {
       return sendForsendelse(forsendelse, axiosInstance)
     },
-    getStatus: (forsendelseId) => {
-      return getStatus(forsendelseId, axiosInstance)
+    getStatus: (forsendelseIds) => {
+      return getStatus(forsendelseIds, axiosInstance)
+    },
+    getHistory: (forsendelseId) => {
+      return getForsendelseHistorikk(forsendelseId, axiosInstance)
+    },
+    getSigningHistory: (forsendelseId) => {
+      return getSigneringHistorikk(forsendelseId, axiosInstance)
+    },
+    getDocumentMetadata: (forsendelseId) => {
+      return getDokumentMetadata(forsendelseId, axiosInstance)
+    },
+    getForsendelseTyper: () => {
+      return getForsendelseTyper(axiosInstance)
+    },
+    getForsendelseEksternref: (eksternref) => {
+      return getForsendelseEksternref(eksternref, axiosInstance)
+    },
+    setForsendelseLest: (forsendelseId, lestav) => {
+      return setForsendelseLest(forsendelseId, lestav, axiosInstance)
     }
   }
 }

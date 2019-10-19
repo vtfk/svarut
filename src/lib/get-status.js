@@ -1,6 +1,7 @@
-module.exports = async (forsendelseId, instance) => {
+module.exports = async (forsendelseIds, instance) => {
   try {
-    const { data } = await instance.get(`${forsendelseId}/status`)
+    const body = Array.isArray(forsendelseIds) ? forsendelseIds : [forsendelseIds]
+    const { data } = await instance.post('statuser', body)
     return data
   } catch (error) {
     if (error.response) return (error.response.data)

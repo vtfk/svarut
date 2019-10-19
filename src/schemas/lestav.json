@@ -18,6 +18,5 @@
       "required": ["lestAvFodselsNummer","navnPaEksterntSystem","datoLest"]
     }
   },
-  "$ref": "#/definitions/lestAv",
-"$schema": "http://json-schema.org/draft-06/schema#"
+  "$ref": "#/definitions/lestAv"
 }

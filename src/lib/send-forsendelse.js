@@ -3,7 +3,7 @@ const FormData = require('form-data')
 const { createReadStream, existsSync, statSync } = require('fs')
 const forsendelseSchema = require('../schemas/forsendelse.json')
 
-const ajv = new Ajv()
+const ajv = new Ajv({ allErrors: true })
 const forsendelseValidator = ajv.compile(forsendelseSchema)
 
 module.exports = async (forsendelse, instance) => {
@@ -39,6 +39,8 @@ module.exports = async (forsendelse, instance) => {
           throw Error(`File ${document.filePath} does not exist`)
         }
       })
+
+    // TODO: Add support for base64 files.
 
     const sendResult = await instance.post(`${id}/sendForsendelse`, form, { headers: { ...form.getHeaders(), 'Content-Length': form.getLengthSync() } })
     return sendResult.data

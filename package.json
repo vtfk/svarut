@@ -1,5 +1,5 @@
 {
-  "name": "svarut",
+  "name": "@vtfk/svarut",
   "version": "1.0.0",
   "description": "NodeJS SvarUt REST client",
   "main": "src/index.js",
@@ -31,5 +31,8 @@
   "devDependencies": {
     "dotenv": "^8.2.0",
     "standard": "14.3.1"
+  },
+  "directories": {
+    "test": "test"
   }
 }
