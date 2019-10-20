@@ -141,5 +141,5 @@
     console.log('getForsendelseEksternref', forsendelseIds)
   } catch (error) {
     console.error('getForsendelseEksternref', error.message)
-  } */
+  }
 })()
