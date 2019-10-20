@@ -148,10 +148,10 @@ List of available status codes:
     "KLAR_FOR_MOTTAK",
     "IKKE_LEVERT"
 
-### getHistory
+### getForsendelseHistorikk
 ```javascript
 const forsendelseId = 'd24658e8-d65d-4c3e-b201-564b5e880cde'
-const status = svarut.getHistory(forsendelseId)
+const status = svarut.getForsendelseHistorikk(forsendelseId)
 ```
 
 Output:
@@ -171,10 +171,10 @@ Output:
 }
 ```
 
-### getSigningHistory
+### getSigneringHistorikk
 ```javascript
 const forsendelseId = 'd24658e8-d65d-4c3e-b201-564b5e880cde'
-const status = svarut.getSigningHistory(forsendelseId)
+const status = svarut.getSigneringHistorikk(forsendelseId)
 ```
 
 #### Ikke startet signering
@@ -237,10 +237,10 @@ const status = svarut.getSigningHistory(forsendelseId)
 }
 ```
 
-### getDocumentMetadata
+### getDokumentMetadata
 ```javascript
 const forsendelseId = 'd24658e8-d65d-4c3e-b201-564b5e880cde'
-const metadata = await svarut.getDocumentMetadata(forsendelseId)
+const metadata = await svarut.getDokumentMetadata(forsendelseId)
 ```
 
 Output:

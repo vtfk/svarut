@@ -34,13 +34,13 @@ module.exports = (settings) => {
     getStatus: (forsendelseIds) => {
       return getStatus(forsendelseIds, axiosInstance)
     },
-    getHistory: (forsendelseId) => {
+    getForsendelseHistorikk: (forsendelseId) => {
       return getForsendelseHistorikk(forsendelseId, axiosInstance)
     },
-    getSigningHistory: (forsendelseId) => {
+    getSigneringHistorikk: (forsendelseId) => {
       return getSigneringHistorikk(forsendelseId, axiosInstance)
     },
-    getDocumentMetadata: (forsendelseId) => {
+    getDokumentMetadata: (forsendelseId) => {
       return getDokumentMetadata(forsendelseId, axiosInstance)
     },
     getForsendelseTyper: () => {
