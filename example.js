@@ -11,6 +11,8 @@
   let forsendelseId
 
   try {
+    const base64File = Buffer.from(require('fs').readFileSync('./test/data/pdf-a.pdf')).toString('base64')
+
     const forsendelse = {
       tittel: 'Testforsendelse #10',
       eksternReferanse: '54321',
@@ -30,7 +32,7 @@
         {
           filnavn: 'pdf-a.pdf',
           mimeType: 'application/pdf',
-          data: Buffer.from(require('fs').readFileSync('./test/data/pdf-a.pdf')).toString('base64')
+          data: base64File
         },
         {
           filnavn: 'test.pdf',

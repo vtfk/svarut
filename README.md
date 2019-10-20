@@ -49,7 +49,7 @@ const forsendelse = {
       filePath: 'test/data/test.pdf',
 
       // Or from base64 data:
-      data: Buffer.from(require('fs').readFileSync('./test/data/test.pdf')).toString('base64')
+      data: base64EncodedFile
     }
   ],
   utskriftsKonfigurasjon: {
