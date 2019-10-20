@@ -44,7 +44,12 @@ const forsendelse = {
     {
       filnavn: 'test.pdf',
       mimeType: 'application/pdf',
-      filePath: 'test/data/test.pdf'
+
+      // Send file from disk:
+      filePath: 'test/data/test.pdf',
+
+      // Or from base64 data:
+      data: Buffer.from(require('fs').readFileSync('./test/data/test.pdf')).toString('base64')
     }
   ],
   utskriftsKonfigurasjon: {

@@ -29,18 +29,23 @@ module.exports = async (forsendelse, instance) => {
     const form = new FormData()
     form.append('forsendelse', JSON.stringify(payload))
 
-    // Adds files
+    // Add files
     forsendelse.dokumenter
-      .filter(({ filePath }) => filePath)
+      .filter(({ data, filePath }) => data || filePath)
       .forEach(document => {
-        if (existsSync(document.filePath)) {
-          form.append('filer', createReadStream(document.filePath), { knownLength: statSync(document.filePath).size })
+        if (document.filePath) {
+          // Add file from filePath
+          if (existsSync(document.filePath)) {
+            form.append('filer', createReadStream(document.filePath), { knownLength: statSync(document.filePath).size })
+          } else {
+            throw Error(`File ${document.filePath} does not exist`)
+          }
         } else {
-          throw Error(`File ${document.filePath} does not exist`)
+          // Add file from base64 data
+          const decodedFile = Buffer.from(document.data, 'base64')
+          form.append('filer', decodedFile, { filename: document.filnavn })
         }
       })
-
-    // TODO: Add support for base64 files.
 
     const sendResult = await instance.post(`${id}/sendForsendelse`, form, { headers: { ...form.getHeaders(), 'Content-Length': form.getLengthSync() } })
     return sendResult.data

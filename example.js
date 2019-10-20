@@ -28,6 +28,11 @@
       },
       dokumenter: [
         {
+          filnavn: 'pdf-a.pdf',
+          mimeType: 'application/pdf',
+          data: Buffer.from(require('fs').readFileSync('./test/data/pdf-a.pdf')).toString('base64')
+        },
+        {
           filnavn: 'test.pdf',
           mimeType: 'application/pdf',
           filePath: 'test/data/test.pdf'
@@ -39,6 +44,7 @@
       }
     }
 
+    // Send multiple files from different sources
     const response = await svarut.sendForsendelse(forsendelse)
     console.log('sendForsendelse', response)
   } catch (error) {
@@ -135,5 +141,5 @@
     console.log('getForsendelseEksternref', forsendelseIds)
   } catch (error) {
     console.error('getForsendelseEksternref', error.message)
-  }
+  } */
 })()
