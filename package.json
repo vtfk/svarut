@@ -30,7 +30,7 @@
     "form-data": "^4.0.0"
   },
   "devDependencies": {
-    "dotenv": "11.0.0",
+    "dotenv": "12.0.4",
     "standard": "16.0.4"
   },
   "directories": {
