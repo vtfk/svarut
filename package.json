@@ -31,9 +31,21 @@
   },
   "devDependencies": {
     "dotenv": "15.0.0",
+    "jest": "27.4.7",
     "standard": "16.0.4"
   },
   "directories": {
     "test": "test"
+  },
+  "standard": {
+    "env": [
+      "jest"
+    ]
+  },
+  "jest": {
+    "testMatch": [
+      "**/test/**/*test.[jt]s?(x)",
+      "**/?(*.)+.(spec|test).[jt]s?(x)"
+    ]
   }
 }

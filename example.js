@@ -1,6 +1,8 @@
 (async () => {
   require('dotenv').config()
 
+  const { forsendelseMultiple, forsendelseBase64MedSignering, lestAv } = require('./test/data/mock-data')
+
   const config = {
     username: process.env.SVARUT_USERNAME,
     password: process.env.SVARUT_PASSWORD
@@ -11,92 +13,15 @@
   let forsendelseId
 
   try {
-    const base64File = Buffer.from(require('fs').readFileSync('./test/data/pdf-a.pdf')).toString('base64')
-
-    const forsendelse = {
-      tittel: 'Testforsendelse #10',
-      eksternReferanse: '54321',
-      mottaker: {
-        postAdresse: {
-          navn: 'Terje Tverrtryne',
-          adresse1: 'Skogsveien 42',
-          postNummer: '3710',
-          postSted: 'Skien',
-          land: 'Norge'
-        },
-        digitalAdresse: {
-          fodselsNummer: '01029400475'
-        }
-      },
-      dokumenter: [
-        {
-          filnavn: 'pdf-a.pdf',
-          mimeType: 'application/pdf',
-          data: base64File
-        },
-        {
-          filnavn: 'test.pdf',
-          mimeType: 'application/pdf',
-          filePath: 'test/data/test.pdf'
-        }
-      ],
-      utskriftsKonfigurasjon: {
-        utskriftMedFarger: false,
-        tosidig: true
-      }
-    }
-
     // Send multiple files from different sources
-    const response = await svarut.sendForsendelse(forsendelse)
+    const response = await svarut.sendForsendelse(forsendelseMultiple)
     console.log('sendForsendelse', response)
   } catch (error) {
     console.error('sendForsendelse', error.message)
   }
 
   try {
-    const forsendelse = {
-      tittel: 'Test signeringsforsendelse #10',
-      eksternReferanse: '12345',
-      mottaker: {
-        postAdresse: {
-          navn: 'Terje Tverrtryne',
-          adresse1: 'Skogsveien 42',
-          postNummer: '3710',
-          postSted: 'Skien',
-          land: 'Norge'
-        },
-        digitalAdresse: {
-          fodselsNummer: '01029400475'
-        }
-      },
-      dokumenter: [
-        {
-          filnavn: 'test.pdf',
-          mimeType: 'application/pdf',
-          filePath: 'test/data/test.pdf',
-          skalSigneres: true
-        }
-      ],
-      utskriftsKonfigurasjon: {
-        utskriftMedFarger: false,
-        tosidig: true
-      },
-      signaturType: 'AUTENTISERT_SIGNATUR',
-      signeringUtloper: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000).getTime(),
-      svarSendesTil: {
-        postAdresse: {
-          navn: 'Vestfold og Telemark fylkeskommune',
-          adresse1: 'Postboks 2844',
-          postNummer: '3702',
-          postSted: 'Skien'
-        },
-        digitalAdresse: {
-          organisasjonsNummer: '821227062'
-        }
-      }
-    }
-
-    const response = await svarut.sendForsendelse(forsendelse)
+    const response = await svarut.sendForsendelse(forsendelseBase64MedSignering)
     forsendelseId = response.id
     console.log('sendForsendelse m/signering', response)
   } catch (error) {
@@ -104,13 +29,7 @@
   }
 
   try {
-    const lestav = {
-      lestAvFodselsNummer: '01029400475',
-      navnPaEksterntSystem: 'eksternt system',
-      datoLest: Date.now()
-    }
-
-    const response = await svarut.setForsendelseLest(forsendelseId, lestav)
+    const response = await svarut.setForsendelseLest(forsendelseId, lestAv)
     console.log('setForsendelseLest', response)
   } catch (error) {
     console.error('setForsendelseLest', error.message)
@@ -124,17 +43,31 @@
   }
 
   try {
-    const response = await svarut.getHistory(forsendelseId)
-    console.log('getHistory', response)
+    const response = await svarut.getForsendelseHistorikk(forsendelseId)
+    console.log('getForsendelseHistorikk', response)
   } catch (error) {
-    console.error('getHistory', error.message)
+    console.error('getForsendelseHistorikk', error.message)
   }
 
   try {
-    const response = await svarut.getDocumentMetadata(forsendelseId)
-    console.log('getDocumentMetadata', response)
+    const response = await svarut.getSigneringHistorikk(forsendelseId)
+    console.log('getSigneringHistorikk', response)
   } catch (error) {
-    console.error('getDocumentMetadata', error.message)
+    console.error('getSigneringHistorikk', error.message)
+  }
+
+  try {
+    const response = await svarut.getDokumentMetadata(forsendelseId)
+    console.log('getDokumentMetadata', response)
+  } catch (error) {
+    console.error('getDokumentMetadata', error.message)
+  }
+
+  try {
+    const response = await svarut.getForsendelseTyper()
+    console.log('getForsendelseTyper', response)
+  } catch (error) {
+    console.error('getForsendelseTyper', error.message)
   }
 
   try {
