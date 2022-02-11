@@ -30,8 +30,8 @@
     "form-data": "^4.0.0"
   },
   "devDependencies": {
+    "dotenv": "16.0.0",
     "jest": "27.4.7",
-    "dotenv": "15.0.1",
     "standard": "16.0.4"
   },
   "directories": {
