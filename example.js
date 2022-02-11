@@ -15,6 +15,7 @@
   try {
     // Send multiple files from different sources
     const response = await svarut.sendForsendelse(forsendelseMultiple)
+    forsendelseId = response.id
     console.log('sendForsendelse', response)
   } catch (error) {
     console.error('sendForsendelse', error.message)
@@ -22,7 +23,7 @@
 
   try {
     const response = await svarut.sendForsendelse(forsendelseBase64MedSignering)
-    forsendelseId = response.id
+    // forsendelseId = response.id
     console.log('sendForsendelse m/signering', response)
   } catch (error) {
     console.error('sendForsendelse m/signering', error.message)

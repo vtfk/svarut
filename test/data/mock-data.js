@@ -1,7 +1,7 @@
 const base64File = Buffer.from(require('fs').readFileSync('./test/data/pdf-a.pdf')).toString('base64')
 
 module.exports.forsendelseBase64 = {
-  tittel: 'Testforsendelse #10',
+  tittel: 'Testforsendelse #11',
   eksternReferanse: '54321',
   mottaker: {
     postAdresse: {
@@ -29,7 +29,7 @@ module.exports.forsendelseBase64 = {
 }
 
 module.exports.forsendelseMultiple = {
-  tittel: 'Testforsendelse #10',
+  tittel: 'Testforsendelse #11',
   eksternReferanse: '54321',
   mottaker: {
     postAdresse: {
@@ -62,7 +62,7 @@ module.exports.forsendelseMultiple = {
 }
 
 module.exports.forsendelseBase64MedSignering = {
-  tittel: 'Test signeringsforsendelse #10',
+  tittel: 'Test signeringsforsendelse #11',
   eksternReferanse: '12345',
   mottaker: {
     postAdresse: {
@@ -104,7 +104,7 @@ module.exports.forsendelseBase64MedSignering = {
 }
 
 module.exports.forsendelseMultipleMedSignering = {
-  tittel: 'Test signeringsforsendelse #10',
+  tittel: 'Test signeringsforsendelse #11',
   eksternReferanse: '12345',
   mottaker: {
     postAdresse: {

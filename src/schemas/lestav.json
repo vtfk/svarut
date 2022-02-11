@@ -11,8 +11,7 @@
         },
         "datoLest": {
           "type": ["number","null"],
-          "multipleOf" : 1,
-          "existingJavaType": "java.util.Date"
+          "multipleOf" : 1
         }
       },
       "required": ["lestAvFodselsNummer","navnPaEksterntSystem","datoLest"]

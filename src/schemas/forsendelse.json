@@ -86,12 +86,10 @@
         "signeringUtloper": {
           "description": "Hvis forsendelsen kan signeres utløper muligheten til å signere etter dette tidspunketet.",
           "type": ["number","null"],
-          "multipleOf" : 1,
-          "existingJavaType": "java.util.Date"
+          "multipleOf" : 1
         },
         "signaturType" : {
           "description": "Signaturtype, angir hvilken type signatur du får tilbake. See mer her: https://samarbeid.difi.no/felleslosninger/esignering",
-          "javaType": "no.ks.fiks.svarut.klient.model.SignaturType",
           "type": ["string","null"],
           "enum": [null, "AUTENTISERT_SIGNATUR","AVANSERT_SIGNATUR"]
         }
@@ -143,7 +141,6 @@
         "giroarkSider": {
           "description": "Liste med sidetall som skal printes på gult giroark. Digital versjon vil få grått giroark. Første side er 1. Ved dobbelsidig print må giroarket ha en tom bakside.",
           "type": ["array","null"],
-          "existingJavaType": "java.util.TreeSet",
           "items": {
             "type": "integer"
           }
@@ -162,7 +159,6 @@
       ],
       "properties": {
         "id": {
-          "existingJavaType": "java.util.UUID",
           "type": "string",
           "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
         }
@@ -200,8 +196,7 @@
         },
         "dokumentetsDato": {
           "type": ["number","null"],
-          "multipleOf" : 1,
-          "existingJavaType": "java.util.Date"
+          "multipleOf" : 1
         },
         "tittel": {
           "type": ["string", "null"]
@@ -234,13 +229,11 @@
         },
         "journalDato": {
           "type": ["number","null"],
-          "multipleOf" : 1,
-          "existingJavaType": "java.util.Date"
+          "multipleOf" : 1
         },
         "dokumentetsDato": {
           "type": ["number","null"],
-          "multipleOf" : 1,
-          "existingJavaType": "java.util.Date"
+          "multipleOf" : 1
         },
         "tittel": {
           "type": ["string", "null"]
