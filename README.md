@@ -260,7 +260,9 @@ Output:
       "sha256hash": "042c2acd5123a4133b479fe165723b659d673bb530aba351745b76857bca21bb",
       "dokumentType": null,
       "nedlasningsUrl": "https://test.svarut.ks.no/forsendelse/d24658e8-d65d-4c3e-b201-564b5e880cde/1",
-      "signeringsUrl": null 
+      "signeringsUrl": null,
+      "ekstraMetadata": [],
+      "inneholderPersonsensitivInformasjon": null
     } 
   ] 
 }
