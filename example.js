@@ -83,7 +83,7 @@
 
   // replace forsendelse nr to prevent sending same shipment multiple times
   const exampleCode = readFileSync(mockDataPath, 'utf8')
-  const match = exampleCode.match(new RegExp(/(#.+')/g))[0]
+  const match = exampleCode.match(/(#.+')/g)[0]
   const currentNumber = Number.parseInt(match.replace('#', '').replace("'", ''))
   const newExampleCode = exampleCode.replace(new RegExp(`#${currentNumber}`, 'g'), `#${currentNumber + 1}`)
   writeFileSync(mockDataPath, newExampleCode, 'utf8')
