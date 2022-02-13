@@ -1,7 +1,9 @@
 (async () => {
   require('dotenv').config()
+  const { readFileSync, writeFileSync } = require('fs')
+  const mockDataPath = './test/data/mock-data.js'
 
-  const { forsendelseMultiple, forsendelseBase64MedSignering, lestAv } = require('./test/data/mock-data')
+  const { forsendelseMultiple, forsendelseBase64MedSignering, lestAv } = require(mockDataPath)
 
   const config = {
     username: process.env.SVARUT_USERNAME,
@@ -78,4 +80,11 @@
   } catch (error) {
     console.error('getForsendelseEksternref', error.message)
   }
+
+  // replace forsendelse nr to prevent sending same shipment multiple times
+  const exampleCode = readFileSync(mockDataPath, 'utf8')
+  const match = exampleCode.match(new RegExp(/(#.+')/g))[0]
+  const currentNumber = Number.parseInt(match.replace('#', '').replace("'", ''))
+  const newExampleCode = exampleCode.replace(new RegExp(`#${currentNumber}`, 'g'), `#${currentNumber + 1}`)
+  writeFileSync(mockDataPath, newExampleCode, 'utf8')
 })()
