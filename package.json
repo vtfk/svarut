@@ -1,6 +1,6 @@
 {
   "name": "@vtfk/svarut",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "NodeJS SvarUt REST client",
   "main": "src/index.js",
   "scripts": {
