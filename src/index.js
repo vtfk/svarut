@@ -1,4 +1,5 @@
 const axios = require('axios')
+const tls = require('tls')
 const sendForsendelse = require('./lib/send-forsendelse')
 const getStatus = require('./lib/get-status')
 const getForsendelseHistorikk = require('./lib/get-forsendelse-historikk')
@@ -24,6 +25,10 @@ module.exports = (settings) => {
       password: settings.password
     }
   }
+
+  // force axios to use TLSv1.2
+  tls.DEFAULT_MIN_VERSION = "TLSv1.2"
+  tls.DEFAULT_MAX_VERSION = "TLSv1.2"
 
   const axiosInstance = axios.create(axiosSettings)
 
