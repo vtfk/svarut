@@ -10,6 +10,8 @@ npm install @vtfk/svarut
 
 ## Usage
 
+This module now forces the use of `TLSv1.2` as this is a requirement from **SvarUT** from **01.05.22**
+
 Please take a look at the [forsendelse](https://github.com/vtfk/svarut/blob/master/src/schemas/forsendelse.json) schema.
 
 ### First - init svarut instance
