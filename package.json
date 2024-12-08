@@ -32,7 +32,7 @@
   "devDependencies": {
     "dotenv": "16.0.3",
     "jest": "27.5.1",
-    "standard": "16.0.4"
+    "standard": "17.1.2"
   },
   "directories": {
     "test": "test"
